@@ -1,14 +1,14 @@
 {
-  "short_name": "React App",
+  "short_name": "Poke api",
   "name": "Create React App Sample",
   "icons": [
     {
-      "src": "favicon.ico",
+      "src": "pokemon_7025 (small).ico",
       "sizes": "64x64 32x32 24x24 16x16",
       "type": "image/x-icon"
     },
     {
-      "src": "logo192.png",
+      "src": "pokemon_7025(big).ico",
       "type": "image/png",
       "sizes": "192x192"
     },
