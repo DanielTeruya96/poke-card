@@ -9,8 +9,9 @@ import CardContent from '@material-ui/core/CardContent';
 import CardActions from '@material-ui/core/CardActions';
 import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
-import { Divider, makeStyles } from '@material-ui/core';
+import {Divider, makeStyles} from '@material-ui/core';
 import CardHeader from '@material-ui/core/CardHeader';
+import Image from 'next/image';
 
 const useStyles = makeStyles(theme => ({
     root: {
@@ -41,7 +42,7 @@ const innerTheme = createTheme({
 
 
 export default function ItemPokemon(props) {
-    const [imagemPokemon, setImagemPokmeon] = useState("");
+    const [imagemPokemon, setImagemPokmeon] = useState("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/201.png");
     const [abilidade, setAbilidade] = useState([]);
 
     const classes = useStyles();
@@ -62,26 +63,30 @@ export default function ItemPokemon(props) {
     return (
 
 
-            <Card sx={{}} className={classes.root}>
-                <CardHeader title={props.nomePokemon} className={classes.header}   />
-                <Divider variant="middle" />
-                <CardContent>
-                    <img className={styles.imgPokeon} src={imagemPokemon} alt={props.nomePokemon}/>
+        <Card sx={{}} className={classes.root}>
+            <CardHeader title={props.nomePokemon} className={classes.header}/>
+            <Divider variant="middle"/>
+            <CardContent>
+                <Image src={imagemPokemon} alt={props.nomePokemon}
+                       width={150}
+                       height={150}/>
 
-                    <div className={classes.list}>
-                        {abilidade.map(({ability}, index) => (
-                            <Typography align="center">{ability.name}</Typography>
-                        ))}
-                    </div>
-                </CardContent>
-                <Divider variant="middle" />
-                <CardActions className={classes.action}>
-                    <Button variant="contained" color="primary">
-                        INFO
-                    </Button>
-                </CardActions>
-            </Card>
 
+                {/*<img className={styles.imgPokeon} src={imagemPokemon} alt={props.nomePokemon}/>*/}
+
+                <div className={classes.list}>
+                    {abilidade.map(({ability}, index) => (
+                        <Typography align="center">{ability.name}</Typography>
+                    ))}
+                </div>
+            </CardContent>
+            <Divider variant="middle"/>
+            <CardActions className={classes.action}>
+                <Button variant="contained" color="primary">
+                    INFO
+                </Button>
+            </CardActions>
+        </Card>
 
 
     );
