@@ -72,8 +72,6 @@ export default function ItemPokemon(props) {
                        height={150}/>
 
 
-                {/*<img className={styles.imgPokeon} src={imagemPokemon} alt={props.nomePokemon}/>*/}
-
                 <div className={classes.list}>
                     {abilidade.map(({ability}, index) => (
                         <Typography align="center">{ability.name}</Typography>
