@@ -68,8 +68,8 @@ export default function ItemPokemon(props) {
             <Divider variant="middle"/>
             <CardContent>
                 <Image src={imagemPokemon} alt={props.nomePokemon}
-                       width={150}
-                       height={150}/>
+                       width={225}
+                       height={225}/>
 
 
                 <div className={classes.list}>

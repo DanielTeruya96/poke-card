@@ -5,6 +5,7 @@ import styles from './style.module.css';
 import {Grid} from "@mui/material";
 import {styled} from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
+import {Box} from "@mui/material";
 
 export default function ListaPokemon() {
 
@@ -33,20 +34,24 @@ export default function ListaPokemon() {
 
 
     return (
-        <div className={styles.listaPokemon}>
-            <Grid container spacing={2}>
+        <div>
+            <Box sx={{flexGrow: 1}}>
+                <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 2, sm: 8, md: 12}}>
 
-                {listaPoke.map(({name, url}, index) => (
-                    <Item>
-                        <ItemPokemon
-                            nomePokemon={name}
-                            url={url}
-                        />
-                    </Item>
+                    {listaPoke.map(({name, url}, index) => (
+                        <Grid item xs={4} sm={4} md={4}>
+                            <Item>
+                                <ItemPokemon
+                                    nomePokemon={name}
+                                    url={url}
+                                />
+                            </Item>
+                        </Grid>
 
-                ))}
+                    ))}
 
-            </Grid>
+                </Grid>
+            </Box>
         </div>
 
     );
