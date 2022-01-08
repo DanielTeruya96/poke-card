@@ -1,7 +1,6 @@
 import React, {useState} from "react";
 import ItemPokemon from "../ItemPokemon";
 import {axios} from 'axios';
-import styles from './style.module.css';
 import {Grid} from "@mui/material";
 import {styled} from '@mui/material/styles';
 import Paper from '@mui/material/Paper';
@@ -12,10 +11,9 @@ export default function ListaPokemon() {
 
     const [listaPoke, setListaPoke] = useState([]);
 
-    var url = "https://pokeapi.co/api/v2/pokemon?limit=150&offset=0";
+    var url = "https://pokeapi.co/api/v2/pokemon?limit=15&offset=0";
 
     const axios = require('axios');
-    var listaPokemon = [];
 
 
     React.useEffect(() => {
@@ -38,7 +36,7 @@ export default function ListaPokemon() {
             <Box sx={{flexGrow: 1}}>
                 <Grid container spacing={{xs: 2, md: 3}} columns={{xs: 2, sm: 8, md: 12}}>
 
-                    {listaPoke.map(({name, url}, index) => (
+                    {listaPoke.map(({name, url}) => (
                         <Grid item xs={4} sm={4} md={4}>
                             <Item>
                                 <ItemPokemon

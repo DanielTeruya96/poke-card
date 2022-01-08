@@ -1,8 +1,4 @@
 import React, {useState} from "react";
-import styles from './style.module.css';
-import {Grid} from "@mui/material";
-import {createTheme, ThemeProvider} from '@mui/material/styles';
-import {green, orange} from '@mui/material/colors';
 import {axios} from 'axios';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
@@ -12,8 +8,11 @@ import Typography from '@material-ui/core/Typography';
 import {Divider, makeStyles} from '@material-ui/core';
 import CardHeader from '@material-ui/core/CardHeader';
 import Image from 'next/image';
+import PokemonDialog from "../PokemonDialog";
 
-const useStyles = makeStyles(theme => ({
+
+
+const useStyles = makeStyles( ({
     root: {
         borderRadius: 12,
         minWidth: 256,
@@ -32,18 +31,21 @@ const useStyles = makeStyles(theme => ({
     },
 }));
 
-const innerTheme = createTheme({
-    palette: {
-        primary: {
-            main: green[500],
-        },
-    },
-});
-
 
 export default function ItemPokemon(props) {
     const [imagemPokemon, setImagemPokmeon] = useState("https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/back/201.png");
     const [abilidade, setAbilidade] = useState([]);
+    const [open, setOpen] = React.useState(false);
+    const [pokemon, setPokemon] = useState({"name":"unknown","order":"0"});
+
+
+    const handleClickOpen = () => {
+        setOpen(true);
+    };
+
+    const handleClose = () => {
+        setOpen(false);
+    };
 
     const classes = useStyles();
 
@@ -55,6 +57,7 @@ export default function ItemPokemon(props) {
 
                 setImagemPokmeon(response.data.sprites.front_default);
                 setAbilidade(response.data.abilities);
+                setPokemon(response.data);
 
             });
     }, []);
@@ -64,7 +67,8 @@ export default function ItemPokemon(props) {
 
 
         <Card sx={{}} className={classes.root}>
-            <CardHeader title={props.nomePokemon} className={classes.header}/>
+
+            <CardHeader title={'#'+pokemon.order+' '+pokemon.name}   className={classes.header}/>
             <Divider variant="middle"/>
             <CardContent>
                 <Image src={imagemPokemon} alt={props.nomePokemon}
@@ -73,16 +77,21 @@ export default function ItemPokemon(props) {
 
 
                 <div className={classes.list}>
-                    {abilidade.map(({ability}, index) => (
+                    {abilidade.map(({ability}) => (
                         <Typography align="center">{ability.name}</Typography>
                     ))}
                 </div>
             </CardContent>
             <Divider variant="middle"/>
             <CardActions className={classes.action}>
-                <Button variant="contained" color="primary">
+                <Button variant="contained" color="primary" onClick={handleClickOpen} >
                     INFO
                 </Button>
+                <PokemonDialog
+                    selectedValue={pokemon}
+                    open={open}
+                    onClose={handleClose}
+                />
             </CardActions>
         </Card>
 
